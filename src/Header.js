@@ -7,8 +7,17 @@ import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
 import ChatIcon from "@mui/icons-material/Chat";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import HeaderOption from "./HeaderOption";
+import { useDispatch } from "react-redux";
+import { auth } from "./firebase";
+import { logout } from "./features/userSlice";
 
 function Header() {
+    const dispatch = useDispatch();
+    const logoutOfApp = () => {
+        dispatch(logout());
+        auth.signOut();
+    };
+
     return (
         <div className="header">
             <div className="header__left">
@@ -31,6 +40,7 @@ function Header() {
                 <HeaderOption
                     avatar="https://cdn.icon-icons.com/icons2/2643/PNG/512/male_man_people_person_avatar_white_tone_icon_159363.png"
                     title="Me"
+                    onClick={logoutOfApp}
                 />
             </div>
         </div>
